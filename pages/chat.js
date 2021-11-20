@@ -20,8 +20,8 @@ import Close from "../public/icons/close";
 function Chat() {
   const [profile, setProfile] = useState(false);
   const [desc, setDesc] = useState(true);
+  const [dataUser, setUser] = useState({ img: "" });
   const [contactUser, setContact] = useState({ img: "" });
-  const dataUser = localStorage.getUser();
 
   async function getContactData(email) {
     const res = await apiClient.get(
@@ -30,12 +30,13 @@ function Chat() {
         : "user/usuario1@gmail.com"
     );
 
+    const res2 = await apiClient.get("user/usuario2@gmail.com");
     setContact(res.data.user);
   }
 
   // load data
   useEffect(() => {
-    getContactData(dataUser.email);
+    getContactData("usuario1@gmail.com");
 
     const socket = SocketIO(process.env.SERVER_URI, {
       transports: ["websocket"],

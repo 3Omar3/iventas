@@ -45,7 +45,11 @@ function Login() {
       const res = await apiClient.post("login", data);
       if (res.status === 200) {
         localStorage.setUser(res.data.user);
-        router.push("/chat");
+
+        router.push({
+          pathname: "/chat",
+          query: { user: res.data.user },
+        });
       } else throw new Error("invalido");
     } catch (err) {
       setLoginFailed(true);
