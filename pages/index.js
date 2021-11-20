@@ -42,7 +42,7 @@ function Login() {
         password: e.target.txtPassword.value,
       };
 
-      const res = await apiClient.post("/login", data);
+      const res = await apiClient.post("login", data);
       if (res.status === 200) {
         localStorage.setUser(res.data.user);
         router.push("/chat");
